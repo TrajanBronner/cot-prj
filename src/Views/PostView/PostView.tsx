@@ -69,6 +69,11 @@ const PostView: React.FunctionComponent<any> = (props) => {
         _setPaginationAndList(postList, newPage);
     };
 
+    const deletePost = (postId: string) => {
+        setPostList(postList.filter(post => post.id !== postId));
+        setDisplayedPostList(displayedPostList.filter(post => post.id !== postId));
+    };
+
     return (
         <div>
 
@@ -80,11 +85,27 @@ const PostView: React.FunctionComponent<any> = (props) => {
                 {!isLastPage() && <button className={'mx mw-100'} onClick={goToLastPage}>Last page</button>}
             </div>
 
-            {
-                displayedPostList.map(post => {
-                    return <PostDisplay key={post.id} post={post}/>;
-                })
-            }
+            <div className={'cent'}>
+                <table className={'m'}>
+                    <thead>
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {
+                        displayedPostList.map(post => {
+                            return <PostDisplay key={post.id} post={post} deletePost={deletePost}/>;
+                        })
+                    }
+
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     );
 };
