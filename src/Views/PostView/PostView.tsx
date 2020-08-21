@@ -18,7 +18,7 @@ const PostView: React.FunctionComponent<any> = (props) => {
             .subscribe({
                 next: postList => {
                     setPostList(postList);
-                    setPaginatedPostList(postList, 0);
+                    _setPaginationAndList(postList, 0);
                 },
                 error: error => {
                     // TODO
@@ -31,7 +31,8 @@ const PostView: React.FunctionComponent<any> = (props) => {
 
     }, []);
 
-    const setPaginatedPostList = (postList: Post[], page: number): void => {
+    const _setPaginationAndList = (postList: Post[], page: number): void => {
+        setCurrentPage(page);
         const partialPostList = postList.slice(page * nbResults, (page + 1) * nbResults);
         setDisplayedPostList(partialPostList);
     };
@@ -49,19 +50,23 @@ const PostView: React.FunctionComponent<any> = (props) => {
     };
 
     const goToPreviousPage = () => {
-        setCurrentPage(currentPage - 1);
+        const newPage = currentPage - 1;
+        _setPaginationAndList(postList, newPage);
     };
 
     const goToNextPage = () => {
-        setCurrentPage(currentPage + 1);
+        const newPage = currentPage + 1;
+        _setPaginationAndList(postList, newPage);
     };
 
     const goToFirstPage = () => {
-        setCurrentPage(0);
+        const newPage = 0;
+        _setPaginationAndList(postList, newPage);
     };
 
     const goToLastPage = () => {
-        setCurrentPage(lastPage());
+        const newPage = lastPage();
+        _setPaginationAndList(postList, newPage);
     };
 
     return (
