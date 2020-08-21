@@ -41,7 +41,7 @@ export class User {
     }
 
     static deserialize(userData: UserDataInterface): User {
-        return new User ({
+        return new User({
             id: userData.id,
             name: userData.name,
             username: userData.username,
@@ -57,10 +57,10 @@ export class User {
             companyName: userData.company.name,
             companyCatchPhrase: userData.company.catchPhrase,
             companyBs: userData.company.bs,
-        })
+        });
     }
 
-    getAddress(): string {
+    fullAddress(): string {
         return `${this.street} ${this.suite} ${this.zipcode} ${this.city}`;
     }
 

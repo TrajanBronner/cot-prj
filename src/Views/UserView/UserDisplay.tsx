@@ -33,7 +33,11 @@ const UserDisplay: React.FunctionComponent<LocalProps> = (props) => {
             </div>
 
 
-            {showDetails && <div>{props.user?.getAddress()}</div>}
+            {showDetails && <div className={'m'}>
+                <div><span>Username</span><span>{props.user?.username}</span></div>
+                <div><span>Mail</span><span>{props.user?.email}</span></div>
+                <div><span>Adress</span><span>{props.user?.fullAddress()}</span></div>
+            </div>}
 
         </div>
     );
