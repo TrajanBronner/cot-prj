@@ -113,7 +113,7 @@ const PostView: React.FunctionComponent<any> = (props) => {
                 </div>
             </React.Fragment>}
 
-            <PostListDisplay postList={displayedPostList}/>
+            <PostListDisplay postList={displayedPostList} deletePost={deletePost}/>
 
         </div>
     );

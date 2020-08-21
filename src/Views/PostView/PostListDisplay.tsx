@@ -4,7 +4,7 @@ import PostDisplay from './PostDisplay';
 
 type LocalProps = {
     postList: Post[]
-    deletePost?: () => void
+    deletePost?: (id: string) => void
 }
 
 const PostListDisplay: React.FunctionComponent<LocalProps> = (props) => {
