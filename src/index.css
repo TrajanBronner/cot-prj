@@ -24,8 +24,12 @@ code {
     margin: 30px 0;
 }
 
+.mw-100 {
+    min-width: 120px;
+}
+
 .mw-300 {
-    min-width: 300;
+    min-width: 300px;
 }
 
 .bold {

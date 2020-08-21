@@ -8,10 +8,9 @@ enum allView {
     Posts = 'posts',
 }
 
-
 const App = () => {
 
-    const [displayedView, setDisplayedView] = useState(allView.Users);
+    const [displayedView, setDisplayedView] = useState(allView.Posts);
 
     const selectView = (view: allView) => {
         setDisplayedView(view);
