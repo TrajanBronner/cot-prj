@@ -4,16 +4,23 @@ import {Post} from '../Models/Post';
 class PostService {
 
     private _relativeUrl = 'posts';
+    private _cachedPostList: any;
 
     async retrievePost(): Promise<Post> {
         return Post.deserialize((await axios.get(`${this._relativeUrl}`)).data);
     }
 
     async retrievePostList(): Promise<Post[]> {
+        if (this._cachedPostList != null) {
+            return this._cachedPostList;
+        }
+
         const response = await axios.get(`${this._relativeUrl}`);
 
-        return response.data
-            .map((postData: any) => Post.deserialize(postData));
+        const postList = response.data.map(Post.deserialize);
+        this._cachedPostList = postList;
+
+        return postList;
     }
 
     async updatePost(postId: number, postData: Partial<Post>): Promise<Post> {
