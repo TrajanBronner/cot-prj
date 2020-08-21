@@ -3,7 +3,7 @@ import {from} from 'rxjs';
 import {Post} from '../../Models/Post';
 import PostsService from '../../Services/PostsService';
 import SearchInput from '../Common/SearchInput';
-import PostDisplay from './PostDisplay';
+import PostListDisplay from './PostListDisplay';
 
 const PostView: React.FunctionComponent<any> = (props) => {
 
@@ -94,7 +94,7 @@ const PostView: React.FunctionComponent<any> = (props) => {
             post.title?.toLowerCase()?.includes(_term)
             || post.body?.toLowerCase()?.includes(_term));
         setDisplayedPostList(matchingPosts);
-        
+
         _setPaginationAndList(matchingPosts, 0);
     };
 
@@ -113,26 +113,7 @@ const PostView: React.FunctionComponent<any> = (props) => {
                 </div>
             </React.Fragment>}
 
-            <div className={'cent'}>
-                <table className={'m'}>
-                    <thead>
-                    <tr>
-                        <th>
-                            Title
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    {
-                        displayedPostList.map(post => {
-                            return <PostDisplay key={post.id} post={post} deletePost={deletePost}/>;
-                        })
-                    }
-
-                    </tbody>
-                </table>
-            </div>
+            <PostListDisplay postList={displayedPostList}/>
 
         </div>
     );

@@ -23,6 +23,11 @@ class PostService {
     async deletePost(postId: number): Promise<any> {
         return axios.delete(`${this._relativeUrl}/${postId}`);
     }
+
+    async retrievePostFromUser(userId: string): Promise<Post[]> {
+        const postList = await this.retrievePostList();
+        return postList.filter(post => post.userId === userId);
+    }
 }
 
 export default new PostService();

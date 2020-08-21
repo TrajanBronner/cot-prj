@@ -3,7 +3,7 @@ import {Post} from '../../Models/Post';
 
 type LocalProps = {
     post: Post
-    deletePost: (id: string) => void
+    deletePost?: (id: string) => void
 }
 
 const PostDisplay: React.FunctionComponent<LocalProps> = (props) => {
@@ -14,7 +14,7 @@ const PostDisplay: React.FunctionComponent<LocalProps> = (props) => {
                 {props.post.title}
             </td>
             <td>
-                <button onClick={() => props.deletePost(props.post.id)}>Delete</button>
+                {props.deletePost && <button onClick={() => props.deletePost && props.deletePost(props.post.id)}>Delete</button>}
             </td>
         </tr>
     );
