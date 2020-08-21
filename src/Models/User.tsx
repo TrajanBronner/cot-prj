@@ -60,4 +60,8 @@ export class User {
         })
     }
 
+    getAddress(): string {
+        return `${this.street} ${this.suite} ${this.zipcode} ${this.city}`;
+    }
+
 }
