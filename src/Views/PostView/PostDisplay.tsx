@@ -14,7 +14,7 @@ const PostDisplay: React.FunctionComponent<LocalProps> = (props) => {
                 {props.post.title}
             </td>
             <td>
-                <button onClick={() => props.deletePost(props.post.id)}>Delete post</button>
+                <button onClick={() => props.deletePost(props.post.id)}>Delete</button>
             </td>
         </tr>
     );

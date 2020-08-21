@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {from} from 'rxjs';
 import {Post} from '../../Models/Post';
 import PostsService from '../../Services/PostsService';
+import SearchInput from '../Common/SearchInput';
 import PostDisplay from './PostDisplay';
 
 const PostView: React.FunctionComponent<any> = (props) => {
@@ -11,6 +12,7 @@ const PostView: React.FunctionComponent<any> = (props) => {
     const [postList, setPostList] = useState<Post[]>([]);
     const [displayedPostList, setDisplayedPostList] = useState<Post[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(0);
+    const [isSearch, setIsSearch] = useState(false);
 
     useEffect(() => {
 
@@ -74,16 +76,42 @@ const PostView: React.FunctionComponent<any> = (props) => {
         setDisplayedPostList(displayedPostList.filter(post => post.id !== postId));
     };
 
+    const resetSearch = () => {
+        setIsSearch(false);
+        setDisplayedPostList(postList);
+    };
+
+    const searchTerm = (term: string) => {
+        const _term = term?.toLowerCase();
+        if (!_term) {
+            resetSearch();
+            return;
+        }
+
+        setIsSearch(true);
+
+        const matchingPosts = postList.filter(post =>
+            post.title?.toLowerCase()?.includes(_term)
+            || post.body?.toLowerCase()?.includes(_term));
+        setDisplayedPostList(matchingPosts);
+        
+        _setPaginationAndList(matchingPosts, 0);
+    };
+
     return (
         <div>
 
-            <div className={'m'}>Page {currentPage + 1}</div>
-            <div className={'m'}>
-                {!isFirstPage() && <button className={'mx mw-100'} onClick={goToFirstPage}>First page</button>}
-                {!isFirstPage() && <button className={'mx mw-100'} onClick={goToPreviousPage}>Previous page</button>}
-                {!isLastPage() && <button className={'mx mw-100'} onClick={goToNextPage}>Next page</button>}
-                {!isLastPage() && <button className={'mx mw-100'} onClick={goToLastPage}>Last page</button>}
-            </div>
+            <SearchInput title={'Magic search'} onNewSearch={searchTerm} onReset={resetSearch}/>
+
+            {!isSearch && <React.Fragment>
+                <div className={'m'}>Page {currentPage + 1}</div>
+                <div className={'m'}>
+                    {!isFirstPage() && <button className={'mx mw-100'} onClick={goToFirstPage}>First page</button>}
+                    {!isFirstPage() && <button className={'mx mw-100'} onClick={goToPreviousPage}>Previous page</button>}
+                    {!isLastPage() && <button className={'mx mw-100'} onClick={goToNextPage}>Next page</button>}
+                    {!isLastPage() && <button className={'mx mw-100'} onClick={goToLastPage}>Last page</button>}
+                </div>
+            </React.Fragment>}
 
             <div className={'cent'}>
                 <table className={'m'}>

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 type LocalProps = {
-    onNewSearch: (searchedValue: string) => void
+    onNewSearch?: (searchedValue: string) => void
     onReset: () => void
     title: string
 }
@@ -12,7 +12,7 @@ const SearchInput: React.FunctionComponent<LocalProps> = (props) => {
 
     const updateSearch = (newSearch: string) => {
         setSearchedValue(newSearch);
-        props.onNewSearch(newSearch);
+        props.onNewSearch && props.onNewSearch(newSearch);
     };
 
     const resetSearch = () => {
