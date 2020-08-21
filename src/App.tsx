@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
-import PostView from './Views/PostView';
-import UserView from './Views/UserView';
+import PostView from './Views/PostView/PostView';
+import UserView from './Views/UserView/UserView';
 
 enum allView {
     Users = 'users',

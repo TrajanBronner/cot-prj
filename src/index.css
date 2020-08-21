@@ -16,6 +16,18 @@ code {
     margin: 30px;
 }
 
+.mx {
+    margin: 0 30px;
+}
+
+.my {
+    margin: 30px 0;
+}
+
+.mw-300 {
+    min-width: 300;
+}
+
 .bold {
     font-weight: bold;
 }
